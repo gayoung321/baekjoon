@@ -1,0 +1,45 @@
+import random
+
+def fill_random(n):
+    limit = n * n * 10
+    return [[random.randint(1, limit - 1) for _ in range(n)] for _ in range(n)]
+
+def print_matrix(matrix, name):
+    print(f"--- {name} Matrix ---")
+    for row in matrix:
+        for val in row:
+            print(f"{val:5d}", end=" ")
+        print()
+    print()
+
+def multiply_and_add(A, B, C, n):
+    prod = [[0] * n for _ in range(n)]
+    for i in range(n):
+        for j in range(n):
+            for k in range(n):
+                prod[i][j] += A[i][k] * B[k][j]
+    
+    result = [[prod[i][j] + C[i][j] for j in range(n)] for i in range(n)]
+    return result
+
+def main():
+    try:
+        n = int(input(" 입력 : "))
+        if not (1 < n <= 5):
+            return
+    except ValueError:
+        return
+
+    A = fill_random(n)
+    B = fill_random(n)
+    C = fill_random(n)
+
+    print_matrix(A, "A")
+    print_matrix(B, "B")
+    print_matrix(C, "C")
+
+    result = multiply_and_add(A, B, C, n)
+    print_matrix(result, "Result (A * B + C)")
+
+if __name__ == "__main__":
+    main()
