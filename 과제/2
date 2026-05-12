@@ -1,0 +1,33 @@
+import random
+
+def fill_random(n):
+    limit = n * n * 10
+    return [[random.randint(1, limit - 1) for _ in range(n)] for _ in range(n)]
+
+def print_matrix(matrix, name):
+    print(f" {name} Matrix")
+    for row in matrix:
+        for val in row:
+            print(f"{val:5d}", end=" ")
+        print()
+    print()
+
+def transpose(matrix, n):
+    return [[matrix[j][i] for j in range(n)] for i in range(n)]
+
+def main():
+    try:
+        n = int(input(" 입력 : "))
+        if not (1 < n <= 5):
+            return
+    except ValueError:
+        return
+
+    original = fill_random(n)
+    print_matrix(original, "Original")
+
+    result = transpose(original, n)
+    print_matrix(result, "Transposed")
+
+if __name__ == "__main__":
+    main()
